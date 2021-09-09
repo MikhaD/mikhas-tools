@@ -35,5 +35,9 @@ readToolValues(path) {
 	global settings
 	updateHashMap(path, "Tools", tools)
 	for key in tools
-		settings[key] := iniReadSection(path, key)
+	{
+		toolSettings := iniReadSection(path, key)
+		if (!settings.HasKey(key) OR settings[key].Count() == 0 OR toolSettings.Count() > 0)
+			settings[key] := toolSettings
+	}
 }

@@ -1,4 +1,4 @@
-﻿;Version Number When Compiled: 1.12
+﻿;Version Number When Compiled: 1.13
 
 ; SEE README FOR INSTRUCTIONS AND INFORMATION ABOUT ADDING NEW TOOLS
 
@@ -29,6 +29,7 @@ toolArray :=[["CtrlAltN",	"Ctrl Alt N  - Open NotePad++",												0]
 			,["AltC",		"Alt C       - Toggle autoclicker (Left)",									0]
 			,["CtrlAltC",	"Ctrl Alt C  - Toggle autoclicker (Right)",									0]
 			,["AltLMidC",	"Alt Click   - Middle click (useful on mouseless laptops)",					0]
+			; ,["NewWorld",	"Ctrl F1     - Create a new minecraft world from the title screen",			0]
 			,[]
 			,["BackBrackD",	"Type ]d to insert the current date",										0]
 			,["BackBrackT",	"Type ]t to insert the current time",										0]
@@ -51,13 +52,15 @@ for i, tool in toolArray
 		tools[tool[1]] := tool[3]
 }
 
-; Update settings and tools defualt states from settings file if it exists
-readToolValues(settingsFile)
+; Update settings defualt states from settings file if it exists
 updateHashMap(settingsFile, "System", settings)
 
 ; If upOnStart is true this activates the Gui
 If (settings["upOnStart"] == 1)
 	Gosub, ShowGUI
+Else {
+	readToolValues(settingsFile)
+}
 
 ;  _____           _                 
 ; /  ___|         | |                
@@ -90,6 +93,7 @@ If (settings["upOnStart"] == 1)
 #Include, hotkeys/AltC.ahk
 #Include, hotkeys/CtrlAltC.ahk
 #Include, hotkeys/AltLMidC.ahk
+; #Include, hotkeys/NewWorld.ahk
 
 
 ;  _   _       _       _        _

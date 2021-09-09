@@ -2,6 +2,8 @@
 ShowGUI:
 #If MGUIup = 0
 $^!h::
+	readToolValues(settingsFile)
+	updateHashMap(settingsFile, "System", settings)
 	Gui, RoS: +AlwaysOnTop -Caption +Border
 	Gui, RoS: Margin, 20, 10
 	Gui, RoS: Font, s16 w700, Arial Black

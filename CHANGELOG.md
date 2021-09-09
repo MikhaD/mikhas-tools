@@ -1,4 +1,7 @@
-## Next version (1.12):
+## Next Version (1.13):
+- Added gitignore and ignored release folder
+
+## 1.12:
 - Deleted wynncraft related tools
 - Moved changelog from comments to a markdown file
 - Removed secret ctrl + p pause hotkey
@@ -10,6 +13,7 @@
 - Removed all spell check hotstrings that were word variations like receiver and received in favor of a insta activate hotstring for the root word
 - Moved todos from comments to a markdown file
 - Created a readme with general info about the script, info about existing data structures, and the instructions to make a new tool (moved from the comments)
+- Settings now reload from file when gui is opened
 
 ## 1.11:
 - Added Alt Click to middle mouse button hotkey
