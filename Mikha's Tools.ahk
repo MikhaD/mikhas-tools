@@ -1,29 +1,27 @@
-﻿;Version Number When Compiled: 1.10
-
-; Changelog:
-; Moved the code that sets the icon of the script to the top of the script before the initialization of the variables
-; Added MIKHADAVIDSLT as a computer name that works
-; Removed user name = Mikha as a requirement and put the variable A_UserName into the file path instead
-; Added a time limit to the Script Reloaded/Failed to reload Tooltip, which previously only dissapeared when the mouse moved
-; Added ]py Hotstring
-; Added vs code as a program that can have scripts reloaded by Ctrl + R
-; Added SetBatchLines, -1, SetKeyDelay, -1, SetControlDelay, -1, SetMouseDelay, -1, SetWinDelay, -1 in order to make the script faster
-
-; startup variable:				A_Startup
-; common startup folder path:	C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
-; startup folder path:			C:\Users\Mikha\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-
-; TO ADD A TOOL: 1) Add the tool's description to the ToolInfo array. 2) Add the hotkey to Trigger array. 3) Program the tool.                                    |
-
+﻿; Have a different file for each hotkey/hotstring group
 ; Put the shortcut keys into either a groupbox or outline the text and standardise the size, and use a different font for the description
 ; Ask or test if Notepad++/Word/Minecraft and any other non default programs are on the hosts computer (Test with run command) Inform user that there are tools that apply to nonexistant programs, and have radio buttons asking whether they want to show those tools anyway. If yes, color them differently in the gui. If it gets installed, change it back, or if hidden, ask if the user now want to show them. If not, have the option available in the settings.
 ; - Write mini keyboard with small translucent dot to enable it, like a phone.
 ; - Change autoclicker to click when Alt - C is pressed, and bring up settings when Win - Alt - C is pressed
 ; - Remove tool if the program it is intended for does not exist
 
+;Version Number When Compiled: 1.12
+; Added recieved -> received auto correction hotstring
+; Added recieve -> receive auto correction hotstring
+; Deleted wynncraft related tools
+; Moved autoclicker state variables from the top to where the clickers are implemented
+; Removed secret ctrl + p pause hotkey
+
+; startup variable:				A_Startup
+; common startup folder path:	C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
+; startup folder path:			C:\Users\Mikha\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
+; TO ADD A TOOL: 1) Add the tool's description to the ToolInfo array. 2) Add the hotkey to Trigger array. 3) Program the tool.
+
 ; Add settings and help (little cog image required)
 #NoEnv 						; Avoid checking empty variables to see if they are environment variables
 #Warn						; Enable warnings to assist with detecting common errors.
+#SingleInstance Force
 SendMode Input				; Recommended for new scripts due to its superior speed and reliability.
 SetBatchLines, -1			; Run script as fast as possible
 SetKeyDelay, -1
@@ -31,39 +29,39 @@ SetControlDelay, -1
 SetMouseDelay, -1
 SetWinDelay, -1
 SetWorkingDir %A_ScriptDir%	; Ensures a consistent starting directory.
-#SingleInstance Force
-If (A_ComputerName = "MIKHADAVIDSPC" or A_ComputerName = "MIKHADAVIDSLT")
-	Menu, Tray, Icon, C:\Users\%A_UserName%\Google Drive\Pictures\Icons\Icons\Tools Icon Grey.ico, , 1
-AltCSwitch		:= 2
-CtrlAltCSwitch	:= 2
+Menu, Tray, Icon, images\favicon.ico, , 1
+settingsFile 	:= "oldSettings.ini"
 MGUIup			:= 0
 GUIWidth		:= 830
+; Initial state of auto clickers
+AltCOn := false
+CtrlAltCOn := false
 
 ToolInfo		:= [  "Ctrl Alt N  - Open NotePad++"
 					, "Ctrl Alt M  - Show ToolTip with mouse's coordinates and copy them"
+					, "Ctrl Alt I  - Show ToolTip with the color under the mouse and copy the hex"
 					, "Ctrl Alt F2 - Open a new instance of Word if it is not the active window"
 					, "Ctrl Win I  - Open control panel"
 					, "Ctrl R      - Reload script while working in Notepad++ or VS Code"
-					, "Win C       - Open Command Prompt in the C drive"
 					, "Alt C       - Toggle autoclicker (Left)"
 					, "Ctrl Alt C  - Toggle autoclicker (Right)"
-					, "Enter       - Launch Minecraft when launcher is open"
+					, "Alt Click   - Middle click (useful on mouseless laptops)"
 					, "Type ]d to insert the current date"
 					, "Type ]t to insert the current time"
 					, "Type ]py to insert python script header"
 					, "Automatically close brackets and inverted commas"
-					, "Add the apostrophe to contractions, and accents to words with accented letters "
+					, "Add the apostrophe to contractions, and accents to words with accented letters"
 					, "Turn CapsLock into a shift key and assign Capslock to Ctrl + CapsLock"]
 
 Trigger			:= [  "CtrlAltN"
 					, "CtrlAltM"
+					, "CtrlAltI"
 					, "CtrlAltF2"
 					, "CtrlWinI"
 					, "CtrlR"
-					, "WinC"
 					, "AltC"
 					, "CtrlAltC"
-					, "mcEnter"
+					, "AltLMidC"
 					, "BackBrackD"
 					, "BackBrackT"
 					, "BackBrackPY"
@@ -147,10 +145,12 @@ RoSGuiEscape:
 RoSButtonOK:
 	Gui, RoS: Submit
 	Gui, RoS: Destroy
-	FileDelete %A_ScriptDir%\Settings.ini
-	Loop % Trigger.Length()
-		FileAppend % Tool%A_Index% "#", %A_ScriptDir%\Settings.ini
-	FileAppend `n%runOnStartup%`n%upOnStart%, %A_ScriptDir%\Settings.ini
+	FileDelete %A_ScriptDir%\%settingsFile%
+	Loop % Trigger.Length() {
+		FileAppend % Tool%A_Index% "#", %A_ScriptDir%\%settingsFile%
+	}
+
+	FileAppend `n%runOnStartup%`n%upOnStart%, %A_ScriptDir%\%settingsFile%
 	If runOnStartup = 1
 		{
 		IfNotExist %A_Startup%\%A_ScriptName%.lnk
@@ -175,6 +175,24 @@ $^!m::
 	MouseGetPos, xcoord, ycoord
 	ToolTip, X:%xcoord% Y:%ycoord%
 	clipboard = %xcoord%, %ycoord%
+	loop
+		{
+		MouseGetPos, xcoord2, ycoord2
+		if (xcoord != xcoord2) or (ycoord != ycoord2)
+			{
+			ToolTip
+			break
+			}
+		}
+Return
+
+; Show a tooltip with the hex of the color you're hovering over and copy it to clipboard. Move the mouse to dismiss the tooltip.
+#If Tool%CtrlAltI% = 1
+$^!i::
+	MouseGetPos, xcoord, ycoord
+	PixelGetColor, pixColor, xcoord, ycoord, RGB
+	ToolTip, % "#" SubStr(pixColor, 3)
+	clipboard = % "#" SubStr(pixColor, 3)
 	loop
 		{
 		MouseGetPos, xcoord2, ycoord2
@@ -235,61 +253,36 @@ $^r::											; Reload script while working in Notepad++ or VS Code
 		ToolTip
 Return
 
-#If Tool%WinC% = 1
-$#c::
-	Run, cmd.exe, c:\							; Open Command Prompt in administrator
-Return
-
 ; High speed togglable autoclicker (Left)
 #If Tool%AltC% = 1
 #MaxThreadsPerHotkey 2 ; Enable all hotkeys from this point forth to react to a second press while running, rather than ignoring it.
 $!c::
-#MaxThreadsPerHotkey 1 ; Reset to default.
-	If AltCSwitch = 1
-		AltCSwitch := 3
-	If AltCSwitch = 2
-		AltCSwitch := 1
-	If AltCSwitch = 3
-		AltCSwitch := 2
-	MouseGetPos xcoord, ycoord
-	While AltCSwitch = 1
-		{
-		Click ; %xcoord%, %ycoord%
+	AltCOn := !AltCOn
+	While (AltCOn == true) {
+		Click
 		ToolTip Clicker Active (Left)
-		Sleep 20
+		Sleep 200
 		}
 	ToolTip
 Return
+#MaxThreadsPerHotkey 1 ; Reset to default.
 
 ; High speed togglable autoclicker (Right)
 #If Tool%CtrlAltC% = 1
 #MaxThreadsPerHotkey 2 ; Enable all hotkeys from this point forth to react to a second press while running, rather than ignoring it.
 $^!c::
-#MaxThreadsPerHotkey 1 ; Reset to default.
-	If CtrlAltCSwitch = 1
-		CtrlAltCSwitch := 3
-	If CtrlAltCSwitch = 2
-		CtrlAltCSwitch := 1
-	If CtrlAltCSwitch = 3
-		CtrlAltCSwitch := 2
-	MouseGetPos xcoord, ycoord
-	While CtrlAltCSwitch = 1
-		{
-		Click, right ;, %xcoord%, %ycoord%
+	CtrlAltCOn := !CtrlAltCOn
+	While (CtrlAltCOn == true) {
+		Click, right
 		ToolTip Clicker Active (Right)
 		Sleep 20
 		}
 	ToolTip
 Return
+#MaxThreadsPerHotkey 1 ; Reset to default.
 
-#If Tool%mcEnter% = 1
-#IfWinActive ahk_class CefBrowserWindow
-$Enter::										; Launch minecraft if launcher is open
-	ImageSearch, IPX, IPY, 0, 0, A_ScreenWidth, A_ScreenHeight, %A_ScriptDir%\Images\Play.PNG
-	MouseGetPos MPX, MPY
-	Click %IPX%, %IPY%
-	MouseMove MPX, MPY
-Return
+#If Tool%AltLMidC% == 1
+$!LButton:: SendInput {MButton}
 
 ;  _   _       _       _        _
 ; | | | |     | |     | |      (_)
@@ -317,7 +310,7 @@ Return
 ; This hotstring replaces "]py" with my python script header.
 #If Tool%BackBrackPY% = 1
 :*:]py::
-	sendInput """Description"""`n__author__ = '%A_UserName%'`n
+	sendInput """Description"""`n__author__ = `"%A_UserName%`"`n
 	SendRaw #
 	SendInput %A_MDay%/%A_Mon%/%A_Year%`n
 Return
@@ -342,7 +335,7 @@ Return
 #IfWinNotActive ahk_class Notepad++
 #If Tool%BrackComs% = 1
 :*:"::""{Left}
-;"           
+
 ; These hotstrings add the apostrophe to contractions, add accents to letters and correct certain words
 
 #If Tool%ContCorr% = 1
@@ -485,6 +478,12 @@ Return
 
 #If Tool%ContCorr% = 1
 ::Quebec::Québec
+
+#If Tool%ContCorr% = 1
+::recieved::received
+
+#If Tool%ContCorr% = 1
+::recieve::receive
 
 #If Tool%ContCorr% = 1
 ::seance::séance
@@ -640,29 +639,28 @@ Return
 :c:Ill::I'll
 
 ; This hotstring replaces ahk with AutoHotkey in chrome and word
-#If WinActive("ahk_class Chrome_WidgetWin_1", , "WhatsApp") or WinActive("ahk_class OpusApp")
-::ahk::AutoHotkey
+#If WinActive("ahk_class Chrome_WidgetWin_1", , "Visual Studio Code") or WinActive("ahk_class OpusApp")
+;::ahk::AutoHotkey
 
 ; This hotkey turns CapsLock into a Shift key and reassigns Capslock to Ctrl + CapsLock
 #If Tool%CapsLKill% = 1
-^CapsLock::CapsLock
+$^CapsLock::CapsLock
 
 #If Tool%CapsLKill% = 1
-CapsLock::Shift
+$CapsLock::Shift
 
 
 Initialize:
-	IfExist, %A_ScriptDir%\Settings.ini
+	IfExist, %A_ScriptDir%\%settingsFile%
 		{
-		FileReadLine, runOnStartup, %A_ScriptDir%\Settings.ini, 2
-		FileReadLine, upOnStart, %A_ScriptDir%\Settings.ini, 3
-		FileReadLine, Settings, %A_ScriptDir%\Settings.ini, 1
+		FileReadLine, runOnStartup, %A_ScriptDir%\%settingsFile%, 2
+		FileReadLine, upOnStart, %A_ScriptDir%\%settingsFile%, 3
+		FileReadLine, Settings, %A_ScriptDir%\%settingsFile%, 1
 		StringSplit Settings, Settings, #
 		Loop % Trigger.Length()
 			Tool%A_Index% := Settings%A_Index%
 		}
-	else
-		{
+	else {
 		runOnStartup := 1
 		upOnStart := 1
 		Loop % Trigger.Length()
@@ -674,8 +672,7 @@ Initialize:
 		IfNotExist %A_Startup%\%A_ScriptName%.lnk
 			FileCreateShortcut %A_ScriptFullPath%, %A_Startup%\%A_ScriptName%.lnk
 		}
-	else
-		{
+	else {
 		startupChecked :=
 		IfExist %A_Startup%\%A_ScriptName%.lnk
 			FileDelete %A_Startup%\%A_ScriptName%.lnk
@@ -691,9 +688,5 @@ Initialize:
 		}
 Return
 
-!p::
-	Pause
-Return
-
-^!Esc::
+$^!Esc::
 ExitApp
