@@ -1,3 +1,16 @@
+## Next version (1.12):
+- Deleted wynncraft related tools
+- Moved changelog from comments to a markdown file
+- Removed secret ctrl + p pause hotkey
+- Removed secret exit app hotkey because it doesn't work
+- Rewrote settings system
+- Seperated script code into seperate files
+- Seperated gui code and system functions into their own files
+- Changed autoclickers to use their key in the settings hashmap to store their state instead of global variables
+- Removed all spell check hotstrings that were word variations like receiver and received in favor of a insta activate hotstring for the root word
+- Moved todos from comments to a markdown file
+- Created a readme with general info about the script, info about existing data structures, and the instructions to make a new tool (moved from the comments)
+
 ## 1.11:
 - Added Alt Click to middle mouse button hotkey
 - Changed settings file to a variable
