@@ -71,8 +71,8 @@ Else {
 ;         __/ |                      
 ;        |___/                       
 
-#Include, system/GUI.ahk
-#Include, system/functions.ahk
+#Include, %A_ScriptDir%/system/functions.ahk
+#Include, %A_ScriptDir%/system/GUI.ahk
 
 
 ;  _   _       _   _
@@ -84,16 +84,16 @@ Else {
 ;                            __/ |
 ;                           |___/
 
-#Include, hotkeys/CtrlAltN.ahk
-#Include, hotkeys/CtrlAltM.ahk
-#Include, hotkeys/CtrlAltI.ahk
-#Include, hotkeys/CtrlAltF2.ahk
-#Include, hotkeys/CtrlWinI.ahk
-#Include, hotkeys/CtrlR.ahk
-#Include, hotkeys/AltC.ahk
-#Include, hotkeys/CtrlAltC.ahk
-#Include, hotkeys/AltLMidC.ahk
-; #Include, hotkeys/NewWorld.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltN.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltM.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltI.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltF2.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlWinI.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlR.ahk
+#Include, %A_ScriptDir%/hotkeys/AltC.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltC.ahk
+#Include, %A_ScriptDir%/hotkeys/AltLMidC.ahk
+; #Include, %A_ScriptDir%/hotkeys/NewWorld.ahk
 
 
 ;  _   _       _       _        _
@@ -105,14 +105,14 @@ Else {
 ;                                        __/ |
 ;                                       |___/
 
-#Include, hotstrings/BackBrackD.ahk
-#Include, hotstrings/BackBrackT.ahk
-#Include, hotstrings/BackBrackPY.ahk
-#Include, hotstrings/BrackComs.ahk
-#Include, hotstrings/ContCorr.ahk
-#Include, hotstrings/AccAdd.ahk
-#Include, hotstrings/SpellCheck.ahk
-#Include, hotstrings/CapsLKill.ahk
+#Include, %A_ScriptDir%/hotstrings/BackBrackD.ahk
+#Include, %A_ScriptDir%/hotstrings/BackBrackT.ahk
+#Include, %A_ScriptDir%/hotstrings/BackBrackPY.ahk
+#Include, %A_ScriptDir%/hotstrings/BrackComs.ahk
+#Include, %A_ScriptDir%/hotstrings/ContCorr.ahk
+#Include, %A_ScriptDir%/hotstrings/AccAdd.ahk
+#Include, %A_ScriptDir%/hotstrings/SpellCheck.ahk
+#Include, %A_ScriptDir%/hotstrings/CapsLKill.ahk
 
 
 $!p::

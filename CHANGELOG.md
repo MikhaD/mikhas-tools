@@ -1,5 +1,6 @@
 ## Next Version (1.13):
 - Added gitignore and ignored release folder
+- Made all #include directives use absolute paths
 
 ## 1.12:
 - Deleted wynncraft related tools
