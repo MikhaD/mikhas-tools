@@ -7,3 +7,6 @@
 
 #If tools["SpellCheck"] == 1
 :*:recieve::receive
+
+#If tools["SpellCheck"] == 1
+:*:derivitive::derivative
