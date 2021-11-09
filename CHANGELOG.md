@@ -1,6 +1,12 @@
-## Next Version (1.13):
+## Next Version (1.13.0):
 - Added gitignore and ignored release folder
 - Made all #include directives use absolute paths
+- Added derivitive → derivative spelling correction
+- Changed Alt + Click shortcut to Alt + R-Click to prevent it from overriding the vscode add cursor shortcut
+
+## 1.12.1
+
+- Switched to semver versioning system
 
 ## 1.12:
 - Deleted wynncraft related tools
