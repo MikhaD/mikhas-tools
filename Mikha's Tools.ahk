@@ -1,4 +1,4 @@
-﻿;Version Number When Compiled: 1.13
+﻿;Version Number When Compiled: 1.14
 
 ; SEE README FOR INSTRUCTIONS AND INFORMATION ABOUT ADDING NEW TOOLS
 
@@ -20,29 +20,29 @@ MGUIup			:= 0
 GUIWidth		:= 830
 
 ; 			  Name			Descrption														Default state
-toolArray :=[["CtrlAltN",	"Ctrl Alt N  - Open NotePad++",												0]
-			,["CtrlAltM",	"Ctrl Alt M  - Show coordinates of the mouse and copy them to clipboard",	0]
-			,["CtrlAltI",	"Ctrl Alt I  - Show color under cursor and copy hex to clipboard",			0]
-			,["CtrlAltF2",	"Ctrl Alt F2 - Open a new instance of Word if it is not the active window",	0]
-			,["CtrlWinI",	"Ctrl Win I  - Open control panel",											0]
-			,["CtrlR",		"Ctrl R      - Reload script while working in Notepad++ or VS Code",		0]
-			,["AltC",		"Alt C       - Toggle autoclicker (Left)",									0]
-			,["CtrlAltC",	"Ctrl Alt C  - Toggle autoclicker (Right)",									0]
-			,["AltLMidC",	"Alt R-Click - Middle click (useful on mouseless laptops)",					0]
-			; ,["NewWorld",	"Ctrl F1     - Create a new minecraft world from the title screen",			0]
-			,[]
-			,["BackBrackD",	"Type ]d to insert the current date",										0]
-			,["BackBrackT",	"Type ]t to insert the current time",										0]
-			,["BackBrackPY","Type ]py to insert python script header",									0]
-			,[]
-			,["BrackComs",	"Automatically close brackets and inverted commas",							0]
-			,["ContCorr",	"Add apostrophes to contractions",											0]
-			,["AccAdd",		"Add accents to words with accented letters",								0]
-			,["SpellCheck",	"Auto correct a few spelling mistakes I frequently make",					0]
-			,["CapsLKill",	"Turn CapsLock into a shift key and assign Capslock to Ctrl + CapsLock",	0]]
+toolArray :=[["CtrlAltN",	"Ctrl Alt N  - Open NotePad++",												0],
+	,["CtrlAltM",	"Ctrl Alt M  - Show coordinates of the mouse and copy them to clipboard",	0]
+	,["CtrlAltI",	"Ctrl Alt I  - Show color under cursor and copy hex to clipboard",			0]
+	,["CtrlAltF2",	"Ctrl Alt F2 - Open a new instance of Word if it is not the active window",	0]
+	,["CtrlWinI",	"Ctrl Win I  - Open pre Windows 10 control panel",							0]
+	,["CtrlR",		"Ctrl R      - Reload script while working in Notepad++ or VS Code",		0]
+	,["AltC",		"Alt C       - Toggle autoclicker (Left)",									0]
+	,["CtrlAltC",	"Ctrl Alt C  - Toggle autoclicker (Right)",									0]
+	,["AltLMidC",	"Alt R-Click - Middle click (useful on mouseless laptops)",					0]
+	,["CtrlAltSlsh","Ctrl Alt /  - Reverse the direction of slashes on clipboard or selction",	0]
+	; ,["NewWorld",	"Ctrl F1     - Create a new minecraft world from the title screen",			0]
+	,[]
+	,["BackBrackD",	"Type ]d to insert the current date",										0]
+	,["BackBrackT",	"Type ]t to insert the current time",										0]
+	,["BackBrackPY","Type ]py to insert python script header",									0]
+	,[]
+	,["BrackComs",	"Automatically close brackets and inverted commas",							0]
+	,["ContCorr",	"Add apostrophes to contractions",											0]
+	,["AccAdd",		"Add accents to words with accented letters",								0]
+	,["SpellCheck",	"Auto correct a few spelling mistakes I frequently make",					0]
+	,["CapsLKill",	"Turn CapsLock into a shift key and assign Capslock to Ctrl + CapsLock",	0]]
 
-settings := {"runOnStartup":	1
-			,"upOnStart":		1}
+settings := {"runOnStartup": 1, "upOnStart": 1}
 
 ; Make hashmap of tool names to states called tools
 tools := {}
@@ -62,18 +62,17 @@ Else {
 	readToolValues(settingsFile)
 }
 
-;  _____           _                 
-; /  ___|         | |                
-; \ `--. _   _ ___| |_ ___ _ __ ___  
-;  `--. \ | | / __| __/ _ \ '_ ` _ \ 
+;  _____           _
+; /  ___|         | |
+; \ `--. _   _ ___| |_ ___ _ __ ___
+;  `--. \ | | / __| __/ _ \ '_ ` _ \
 ; /\__/ / |_| \__ \ ||  __/ | | | | |
 ; \____/ \__, |___/\__\___|_| |_| |_|
-;         __/ |                      
-;        |___/                       
+;         __/ |
+;        |___/
 
 #Include, %A_ScriptDir%/system/functions.ahk
 #Include, %A_ScriptDir%/system/GUI.ahk
-
 
 ;  _   _       _   _
 ; | | | |     | | | |
@@ -93,8 +92,8 @@ Else {
 #Include, %A_ScriptDir%/hotkeys/AltC.ahk
 #Include, %A_ScriptDir%/hotkeys/CtrlAltC.ahk
 #Include, %A_ScriptDir%/hotkeys/AltLMidC.ahk
+#Include, %A_ScriptDir%/hotkeys/CtrlAltSlsh.ahk
 ; #Include, %A_ScriptDir%/hotkeys/NewWorld.ahk
-
 
 ;  _   _       _       _        _
 ; | | | |     | |     | |      (_)
@@ -113,7 +112,6 @@ Else {
 #Include, %A_ScriptDir%/hotstrings/AccAdd.ahk
 #Include, %A_ScriptDir%/hotstrings/SpellCheck.ahk
 #Include, %A_ScriptDir%/hotstrings/CapsLKill.ahk
-
 
 $!p::
 	pause

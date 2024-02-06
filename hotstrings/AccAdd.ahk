@@ -1,48 +1,48 @@
 ; These hotstrings add the accents to accented words
 #If tools["AccAdd"] == 1
-::cafe::café
+	::cafe::café
 
 #If tools["AccAdd"] == 1
-::canape::canapé
+	::canape::canapé
 
 #If tools["AccAdd"] == 1
-::cliche::cliché
+	::cliche::cliché
 
 #If tools["AccAdd"] == 1
-::divorcee::divorcée
+	::divorcee::divorcée
 
 #If tools["AccAdd"] == 1
-::doppelganger::doppelgänger
+	::doppelganger::doppelgänger
 
 #If tools["AccAdd"] == 1
-::eclair::éclair
+	::eclair::éclair
 
 #If tools["AccAdd"] == 1
-::entree::entrée
+	::entree::entrée
 
 #If tools["AccAdd"] == 1
-::facade::façade
+	::facade::façade
 
 #If tools["AccAdd"] == 1
-::fiance::fiancé
+	::fiance::fiancé
 
 #If tools["AccAdd"] == 1
-::jalapeno::jalapeño
+	::jalapeno::jalapeño
 
 #If tools["AccAdd"] == 1
-::ole::olé
+	::ole::olé
 
 #If tools["AccAdd"] == 1
-::ombre::ombré
+	::ombre::ombré
 
 #If tools["AccAdd"] == 1
-::pinata::piñata
+	::pinata::piñata
 
 #If tools["AccAdd"] == 1
-::Quebec::Québec
+	::Quebec::Québec
 
 #If tools["AccAdd"] == 1
-::seance::séance
+	::seance::séance
 
 #If tools["AccAdd"] == 1
-::touche::touché
+	::touche::touché

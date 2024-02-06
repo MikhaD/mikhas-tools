@@ -1,11 +1,15 @@
 ## Next Version (1.13.0):
+
+
+## 1.13.0:
+- Added Slash Switch hotkey
 - Added gitignore and ignored release folder
 - Made all #include directives use absolute paths
 - Added derivitive → derivative spelling correction
 - Changed Alt + Click shortcut to Alt + R-Click to prevent it from overriding the vscode add cursor shortcut
+- Added vscode as an exception to the insert brackets and inverted commas hotstring
 
 ## 1.12.1
-
 - Switched to semver versioning system
 
 ## 1.12:
@@ -17,7 +21,7 @@
 - Seperated script code into seperate files
 - Seperated gui code and system functions into their own files
 - Changed autoclickers to use their key in the settings hashmap to store their state instead of global variables
-- Removed all spell check hotstrings that were word variations like receiver and received in favor of a insta activate hotstring for the root word
+- Removed all spell check hotstrings that were word variations like receiver and received in favor of an insta activate hotstring for the root word
 - Moved todos from comments to a markdown file
 - Created a readme with general info about the script, info about existing data structures, and the instructions to make a new tool (moved from the comments)
 - Settings now reload from file when gui is opened

@@ -8,6 +8,14 @@ However, I have continued to use these tools daily since I made them, gradualy i
 1) Write the hotkey or hotstring
 1) Include the new file
 
+## How to compile a new version
+1) Comment out line 16 (`Menu, Tray, Icon, % "img/favicon.ico", , 1`) in [Mikha's Tools.ahk](Mikha's%20Tools.ahk)
+1. Run Ahk2Exe and select [Mikha's Tools.ahk](Mikha's%20Tools.ahk) as the source
+1. Click browse for destination and set the file name to `Mikha's Tools <version>.exe`. The .exe can't be omitted
+1. Set the custom ico
+1. Click Convert
+1. Uncomment line 16 in [Mikha's Tools.ahk](Mikha's%20Tools.ahk)
+
 ## Per tool settings
 Every tool has a key in the settings hashmap where it can store a hashmap of data. The tool can save its settings to the settings file using its unique name as a section header by calling `iniWriteSection` on its settings hashmap.
 
