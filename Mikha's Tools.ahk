@@ -22,7 +22,7 @@ GUIWidth		:= 830
 ; 			  Name			Descrption														Default state
 toolArray :=[["CtrlAltN",	"Ctrl Alt N  - Open NotePad++",												0],
 	,["CtrlAltM",	"Ctrl Alt M  - Show coordinates of the mouse and copy them to clipboard",	0]
-	,["CtrlAltI",	"Ctrl Alt I  - Show color under cursor and copy hex to clipboard",			0]
+	,["CtrlAltI",	"Win Alt I   - Show color under cursor and copy hex to clipboard",			0]
 	,["CtrlAltF2",	"Ctrl Alt F2 - Open a new instance of Word if it is not the active window",	0]
 	,["CtrlWinI",	"Ctrl Win I  - Open pre Windows 10 control panel",							0]
 	,["CtrlR",		"Ctrl R      - Reload script while working in Notepad++ or VS Code",		0]
@@ -40,7 +40,8 @@ toolArray :=[["CtrlAltN",	"Ctrl Alt N  - Open NotePad++",												0],
 	,["ContCorr",	"Add apostrophes to contractions",											0]
 	,["AccAdd",		"Add accents to words with accented letters",								0]
 	,["SpellCheck",	"Auto correct a few spelling mistakes I frequently make",					0]
-	,["CapsLKill",	"Turn CapsLock into a shift key and assign Capslock to Ctrl + CapsLock",	0]]
+	,["CapsLKill",	"Turn CapsLock into a Shift key and assign Capslock to Ctrl + CapsLock",	0]
+	,["NumLKill",	"Turn Numlock into a Backspace key and assign Numlock to Ctrl + Numlock",	0]]
 
 settings := {"runOnStartup": 1, "upOnStart": 1}
 
@@ -112,6 +113,7 @@ Else {
 #Include, %A_ScriptDir%/hotstrings/AccAdd.ahk
 #Include, %A_ScriptDir%/hotstrings/SpellCheck.ahk
 #Include, %A_ScriptDir%/hotstrings/CapsLKill.ahk
+#Include, %A_ScriptDir%/hotstrings/NumLKill.ahk
 
 $!p::
 	pause

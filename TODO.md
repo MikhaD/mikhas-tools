@@ -5,3 +5,6 @@
 
 
 - [ ] Loop through hotkeys and hotstrings folders to find what to load. Figure out a way to store the data about the given file in the file like I do in the discord bot by making each one export and object where the code is just one key of the object
+
+- Version number in settings
+- Reassignable hotkeys

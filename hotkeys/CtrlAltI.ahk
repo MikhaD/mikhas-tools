@@ -1,6 +1,6 @@
 ; Show a tooltip with the hex of the color you're hovering over and copy it to clipboard. Move the mouse to dismiss the tooltip.
 #If tools["CtrlAltI"] == 1
-$^!i::
+$#!i::
 	MouseGetPos, xcoord, ycoord
 	PixelGetColor, pixColor, xcoord, ycoord, RGB
 	ToolTip, % "#" SubStr(pixColor, 3)

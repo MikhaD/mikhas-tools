@@ -1,5 +1,9 @@
-## Next Version (1.13.0):
+## Next Version (1.15.0):
 
+## 1.14.0:
+- Added Numlock killer tool similar to Capslock killer
+- Added exes to the gitignore
+- Changed the shortcut for color picker to <kbd>Win</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd> from <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>. Left the name th same so the settings still work. This is a bad system.
 
 ## 1.13.0:
 - Added Slash Switch hotkey
